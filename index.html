@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tweet Text Checker</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Count the number of characters in your tweet text for Twitter using the official library.">
+    <meta name="author" content="u-ryo">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/gh/twitter/twitter-text@master/js/pkg/twitter-text-3.0.1.min.js"></script>
+  </head>
+  <body onload="parse(document.getElementsByTagName('textarea')[0].value);document.getElementsByTagName('textarea')[0].focus()">
+    <h1>Tweet Text Checker</h1>
+    <p>Count the number of characters in your tweet text for Twitter using the <a href="https://github.com/twitter/twitter-text">official library</a>.</p><a href="https://blog.comnico.jp/we-love-social/twitter-text-count"></a>
+    <textarea cols="80" rows="15" class="twitter-text-result" onkeyup="parse(value)">Sample Text in Japanese❗️
+いろはにほへと ちりぬるを
+わかよたれそ つねならむ
+うゐのおくやま けふこへて
+あさきゆめみし ゑいもせすん!
+https://some.where.com/looooooooooooooooooooooooooooong_name.jpg
+山路を登りながら、こう考えた。😆
+智に働けば角が立つ。情に棹させば流される。意地を通せば窮屈だ。とかくに人の世は住みにくい。🔥</textarea>
+    <ul id="twitter-text-ul">
+      <li>weightedLength(Max:280): <span id="weightedLength">0</span></li>
+      <li>permillage(Max:1000): <span id="permillage">0</span></li>
+      <li>valid: <span id="valid">false</span></li>
+      <li>display range: <span id="displayRangeStart">0</span> - <span id="displayRangeEnd">0</span></li>
+      <li>valid range: <span id="validRangeStart">0</span> - <span id="validRangeEnd">0</span></li>
+    </ul>
+    <h2>What's this?</h2>
+    <p>Counting number of valid characters in the text for <a href="https://twitter.com">Twitter</a> using the <a href="https://github.com/twitter/twitter-text">official library</a>.</p>
+    <h2>Why did I make this?</h2>
+    <p>I was surprised there are complicated rules to count characters for the Twitter text. For example, a CJK character is counted as 2, the URL is always as 23, Emoji is as 2, the new line is 1. I found the official library but its main usage seems to be installed such as <code>npm install twtter-text</code>, <code>gem install twitter-text</code> or on <a href="https://mvnrepository.com/artifact/com.twitter.twittertext/twitter-text">the maven repository</a>. Can't I use it more easily? And on the Internet I can't find such counter using the official library.</p>
+    <h2>Links</h2>
+    <ul>
+      <li><a href="https://github.com/u-ryo/tweet-text-checker">Source Code on Github</a></li>
+      <li><a href="https://github.com/twitter/twitter-text">Official Twitter Library</a></li>
+    </ul>
+    <script>
+      function parse(text) {
+        var result = twttr.txt.parseTweet(text);
+        setText('weightedLength', result.weightedLength);
+        setText('permillage', result.permillage);
+        setText('valid', result.valid);
+        setText('displayRangeStart', result.displayRangeStart);
+        setText('displayRangeEnd', result.displayRangeEnd);
+        setText('validRangeStart', result.validRangeStart);
+        setText('validRangeEnd', result.validRangeEnd);
+        console.log(result);
+        document.getElementById('twitter-text-ul').style.color = result.valid ? '#000' : '#F00';
+      }
+      function setText(tag, content) {
+        document.getElementById(tag).textContent = content;
+      }
+    </script>
+  </body>
+</html>
