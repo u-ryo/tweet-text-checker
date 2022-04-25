@@ -8,7 +8,7 @@ Recently I found that it's complicated how to count the twitter text length. Bas
 The Twitter.com offers the [official library](https://github.com/twitter/twitter-text) to count but I can't find any counting service using the official library. It's true that the twitter text overflow isn't a so big problem for the personal use, but not for the firm using it as advertising. I'm just wondering why the Twitter.com does offer just a library, not as a service.
 
 ## You can try
-You can try through [githack](https://rawcdn.githack.com/u-ryo/tweet-text-checker/f698bbec13c26d73217302898d2ec2263f568ad9/index.html) or using `groovy` like below on the command line with [Docker](https://docker.com).
+You can try through [githack](https://rawcdn.githack.com/u-ryo/tweet-text-checker/master/index.html) or using `groovy` like below on the command line with [Docker](https://docker.com).
 
 ```groovy
 $ docker run --rm -it groovy groovysh
